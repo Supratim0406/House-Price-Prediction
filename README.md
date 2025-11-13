@@ -10,7 +10,155 @@ House Price Prediction/
 ├── Bengaluru_House_Data.csv       # Dataset used
 ├── README.md                      # Project documentation
 └── requirements.txt               # Dependencies (optional)
+```# 🏠 House Price Prediction using Machine Learning
+
+## 📌 Overview
+This project is a **Machine Learning–powered web application** that predicts house prices based on various features such as location, square footage, number of bathrooms, balconies, and BHK (number of bedrooms).
+
+The model is trained using **Linear Regression** with preprocessing steps (One-Hot Encoding for categorical data and Standard Scaling for numerical features) wrapped in a **Scikit-Learn Pipeline**.  
+A **Flask web app** provides an easy-to-use interface where users can input property details and get instant predictions.
+
+---
+
+## 🚀 Features
+- Interactive **Flask web app** with Bootstrap UI  
+- **Dynamic dropdown** for selecting location (auto-fetched from the trained pipeline)  
+- **Preprocessing handled inside the pipeline** (no manual encoding/scaling)  
+- **End-to-end deployment-ready** architecture (pickle + Flask integration)  
+- Clean and modern UI using **Bootstrap 5**  
+
+---
+
+## 🧠 Machine Learning Workflow
+1. **Data Collection & Cleaning:** Dataset includes features such as `location`, `total_sqft`, `bath`, `balcony`, and `BHK`.  
+2. **Feature Engineering:**  
+   - `location` → OneHotEncoded  
+   - Numerical columns → Scaled using `StandardScaler`  
+3. **Model Training:**  
+   ```python
+   Pipeline([
+       ('columntransformer',
+           ColumnTransformer(
+               transformers=[
+                   ('one_hot_encoder',
+                       OneHotEncoder(drop='first', handle_unknown='ignore', sparse_output=False, dtype=int),
+                       ['location']
+                   )
+               ],
+               remainder='passthrough'
+           )
+       ),
+       ('standardscaler', StandardScaler()),
+       ('linearregression', LinearRegression())
+   ])
+   ```
+4. **Model Saving:** The trained pipeline is serialized as `pipeline.pkl` for deployment.  
+5. **Flask Integration:** Loads the trained pipeline, renders input form via `index.html`, and returns predicted price dynamically.
+
+---
+
+## 🧰 Tech Stack
+| Category | Tools / Libraries |
+|-----------|------------------|
+| Language | Python 3 |
+| Web Framework | Flask |
+| Machine Learning | Scikit-Learn, Pandas, NumPy |
+| Frontend | HTML, CSS, Bootstrap 5 |
+| Serialization | Pickle |
+
+---
+
+## 🗂️ Project Structure
 ```
+House Price Prediction/
+│
+├── app.py                 # Flask web app
+├── pipeline.pkl           # Trained ML pipeline
+├── templates/
+│   └── index.html         # Frontend template (Bootstrap)
+├── static/                # (optional) CSS, images, etc.
+├── requirements.txt       # Dependencies
+└── README.md              # Project documentation
+```
+
+---
+
+## ⚙️ Setup & Installation
+
+### 1️⃣ Clone the Repository
+```bash
+git clone https://github.com/yourusername/house-price-prediction.git
+cd house-price-prediction
+```
+
+### 2️⃣ Create Virtual Environment
+```bash
+python -m venv venv
+venv\Scripts\activate    # On Windows
+source venv/bin/activate   # On Mac/Linux
+```
+
+### 3️⃣ Install Dependencies
+```bash
+pip install -r requirements.txt
+```
+
+### 4️⃣ Run the Flask App
+```bash
+python app.py
+```
+
+Then open your browser and go to:
+```
+http://127.0.0.1:5000
+```
+
+---
+
+## 🖥️ Usage
+1. Select a **location** from the dropdown.  
+2. Enter details for **total square feet, bathrooms, balconies, and BHK**.  
+3. Click **Predict Price**.  
+4. The predicted house price will be displayed in ₹ (Lakh).
+
+---
+
+## 📊 Example Prediction
+| Input | Example |
+|--------|----------|
+| Location | Whitefield |
+| Total Sqft | 1200 |
+| Bathrooms | 2 |
+| Balconies | 1 |
+| BHK | 3 |
+| **Predicted Price** | ₹ 85.73 Lakh |
+
+---
+
+## 🧩 Future Improvements
+- Add more ML models (Random Forest, XGBoost) for better accuracy  
+- Deploy on **Render / Vercel / AWS EC2**  
+- Add visualizations (price distribution, feature importance)  
+- Include an API endpoint for programmatic predictions  
+
+---
+
+## 📚 Dependencies
+You can list them in `requirements.txt`:
+```
+flask
+numpy
+pandas
+scikit-learn
+```
+
+---
+
+## 👨‍💻 Author
+**Supratim Saha**  
+📧 your.email@example.com  
+💼 [LinkedIn Profile or GitHub Link]
+
 
 ## ⚙️ Features
 - Data cleaning (handling missing values, removing outliers)
