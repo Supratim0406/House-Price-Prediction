@@ -59,6 +59,9 @@ pip install -r requirements.txt
 ```bash
 jupyter notebook "House Price Prediction.ipynb"
 ```
+## Demo:
+<img width="1700" height="860" alt="image" src="https://github.com/user-attachments/assets/6c20ea29-9f7b-412a-91d9-a124007ecbd6" />
+
 
 ## 🧾 Requirements
 Example `requirements.txt`:
