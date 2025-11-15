@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>House Price Prediction</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .card {
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            font-weight: bold;
+            color: #333;
+        }
+        .form-label {
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="card p-4">
+        <h1 class="text-center mb-4">House Price Prediction</h1>
+
+        <form method="post">
+
+            <!-- LOCATION DROPDOWN -->
+            <div class="mb-3">
+                <label class="form-label">Location</label>
+                <select class="form-select" name="location" required>
+                    <option value="">-- Select Location --</option>
+                    {% for loc in locations %}
+                        <option value="{{ loc }}">{{ loc }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="row mb-3">
+
+                <div class="col-md-6">
+                    <label class="form-label">Total Sqft</label>
+                    <input type="number" step="0.1" class="form-control" name="total_sqft" required>
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label">Number of Bathrooms</label>
+                    <input type="number" class="form-control" name="bath" required>
+                </div>
+
+            </div>
+
+            <div class="row mb-3">
+
+                <div class="col-md-6">
+                    <label class="form-label">Balcony</label>
+                    <input type="number" class="form-control" name="balcony" required>
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label">BHK</label>
+                    <input type="number" class="form-control" name="BHK" required>
+                </div>
+
+            </div>
+
+            <div class="d-grid">
+                <button type="submit" class="btn btn-primary">Predict Price</button>
+            </div>
+
+        </form>
+
+        {% if predicted_price is not none %}
+            <div class="alert alert-success mt-4 text-center">
+                <h4>Predicted Price: ₹ {{ predicted_price | round(2) }} Lakh</h4>
+            </div>
+        {% endif %}
+
+    </div>
+</div>
+
+</body>
+</html>
